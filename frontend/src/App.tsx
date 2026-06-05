@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
@@ -9,6 +8,7 @@ interface Message {
   timestamp: Date;
 }
 
+// @ts-ignore
 const API_URL = 'https://spur-ai-backend-wfs9.onrender.com';
 
 const App: React.FC = () => {
