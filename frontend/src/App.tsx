@@ -8,9 +8,6 @@ interface Message {
   timestamp: Date;
 }
 
-// @ts-ignore
-const API_URL = 'https://spur-ai-backend-wfs9.onrender.com';
-
 const App: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -18,6 +15,8 @@ const App: React.FC = () => {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const BACKEND_URL = 'https://spur-ai-backend-wfs9.onrender.com';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,7 +33,6 @@ const App: React.FC = () => {
     }
   }, [input]);
 
-  // Load existing conversation from localStorage on mount
   useEffect(() => {
     const savedSessionId = localStorage.getItem('spur_session_id');
     if (savedSessionId) {
@@ -45,7 +43,7 @@ const App: React.FC = () => {
 
   const loadHistory = async (sId: string) => {
     try {
-      const response = await axios.get(`${API_URL}/chat/history?sessionId=${sId}`);
+      const response = await axios.get(`${BACKEND_URL}/chat/history?sessionId=${sId}`);
       const historyMessages = response.data.messages.map((msg: any, idx: number) => ({
         id: `hist-${Date.now()}-${idx}`,
         text: msg.text,
@@ -74,7 +72,7 @@ const App: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${API_URL}/chat/message`, {
+      const response = await axios.post(`${BACKEND_URL}/chat/message`, {
         message: input,
         sessionId: sessionId,
       });
