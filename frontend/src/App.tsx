@@ -44,7 +44,7 @@ const App: React.FC = () => {
 
   const loadHistory = async (sId: string) => {
     try {
-      const response = await axios.get(`http://localhost:3000/chat/history?sessionId=${sId}`);
+      const response = await axios.get(`${API_URL}/chat/history?sessionId=${sId}`);
       const historyMessages = response.data.messages.map((msg: any, idx: number) => ({
         id: `hist-${Date.now()}-${idx}`,
         text: msg.text,
@@ -73,7 +73,7 @@ const App: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/chat/message', {
+      const response = await axios.post(`${API_URL}/chat/message`, {
         message: input,
         sessionId: sessionId,
       });
@@ -132,7 +132,7 @@ const App: React.FC = () => {
               </div>
               <p className="text-lg font-medium">How can I help your store today?</p>
               <p className="text-sm max-w-md">
-                I’m an AI support agent for e‑commerce stores. Ask me about Spur’s automation, integrations, or customer engagement.
+                I'm an AI support agent for e‑commerce stores. Ask me about Spur's automation, integrations, or customer engagement.
               </p>
               <div className="flex flex-wrap gap-2 justify-center mt-4">
                 {[
