@@ -8,6 +8,8 @@ interface Message {
   timestamp: Date;
 }
 
+const API_URL = 'https://spur-ai-backend.onrender.com';
+
 const App: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
