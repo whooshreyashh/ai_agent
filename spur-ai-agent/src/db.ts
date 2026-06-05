@@ -2,7 +2,7 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import { randomUUID } from 'crypto';
 
-const db = new Database(path.join(__dirname, '../spur.db'));
+const db = new Database(path.join(__dirname, '../.data/spur.db'));
 
 // Create tables if they don't exist
 db.exec(`
